@@ -26,4 +26,5 @@ services:
 
     latte.helpers:
         class: %latte.helpers.class%
-        arguments: [@router]
+        calls:
+            - [ setContainer, [ @service_container ]]

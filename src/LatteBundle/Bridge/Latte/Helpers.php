@@ -2,16 +2,18 @@
 
 namespace LatteBundle\Bridge\Latte;
 
-use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Nette\Utils\Strings;
 
-class Helpers
+class Helpers implements ContainerAwareInterface
 {
-	private $router;
+	private $container;
 
-	public function __construct(RouterInterface $router)
+	public function setContainer(ContainerInterface $container = null)
 	{
-		$this->router = $router;
+		$this->container = $container;
 	}
 
 	public function loader($helper)
@@ -29,6 +31,19 @@ class Helpers
 		} else {
 			$relative = true;
 		}
-		return $this->router->generate($name, $parameters, $relative ? RouterInterface::RELATIVE_PATH : RouterInterface::ABSOLUTE_PATH);
+		return $this->container->get('router')
+			->generate($name, $parameters, $relative ? UrlGeneratorInterface::RELATIVE_PATH : UrlGeneratorInterface::ABSOLUTE_PATH);
+	}
+
+	public function getAssetUrl($path, $packageName = null)
+	{
+		return $this->container->get('templating.helper.assets')
+			->getUrl($path, $packageName);
+	}
+
+	public function getAssetsVersion($packageName = null)
+	{
+		return $this->container->get('templating.helper.assets')
+			->getVersion($packageName);
 	}
 }

@@ -26,6 +26,7 @@ class Engine extends BaseEngine
 		// $this->compiler->addMacro('cache', new Macros\CacheMacro($this->compiler));
 		Macros\UIMacros::install($this->compiler);
 		// Macros\FormMacros::install($this->compiler);
+		Macros\AssetMacros::install($this->compiler);
 	}
 
 
