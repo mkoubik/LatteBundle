@@ -1,0 +1,29 @@
+parameters:
+    templating.engine.latte.class: LatteBundle\LatteEngine
+    assetic.latte_formula_loader.class: LatteBundle\Bridge\Assetic\FormulaLoader
+    latte.engine.class: LatteBundle\Bridge\Latte\Engine
+    latte.helpers.class: LatteBundle\Bridge\Latte\Helpers
+    latte.cache_dir: %kernel.cache_dir%/latte
+
+services:
+    templating.engine.latte:
+        class: %templating.engine.latte.class%
+        arguments: [@templating.name_parser, @templating.loader, @latte.engine, @latte.helpers]
+        calls:
+            - [setCacheDir, [%latte.cache_dir%]]
+
+    assetic.latte_formula_loader:
+        class: %assetic.cached_formula_loader.class%
+        arguments: [@assetic.latte_formula_loader.real, @assetic.config_cache, %kernel.debug%]
+        tags:
+            - { name: assetic.formula_loader, alias: latte }
+
+    assetic.latte_formula_loader.real:
+        class: %assetic.latte_formula_loader.class%
+
+    latte.engine:
+        class: %latte.engine.class%
+
+    latte.helpers:
+        class: %latte.helpers.class%
+        arguments: [@router]
