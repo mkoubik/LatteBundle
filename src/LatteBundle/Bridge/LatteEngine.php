@@ -2,6 +2,7 @@
 
 namespace LatteBundle\Bridge;
 
+use symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Templating\EngineInterface;
 use Symfony\Component\Templating\TemplateNameParserInterface;
 use Symfony\Component\Templating\Loader\LoaderInterface;
@@ -12,6 +13,8 @@ use Nette\Latte\Engine as Latte;
 use Nette\Caching\Storages\PhpFileStorage;
 use Nette\Caching\Storages\FileJournal;
 use LatteBundle\Bridge\Latte\Helpers;
+use LatteBundle\LatteEvents;
+use LatteBundle\Event\CreateTemplateEvent;
 
 class LatteEngine implements EngineInterface
 {
@@ -19,16 +22,18 @@ class LatteEngine implements EngineInterface
 	protected $loader;
 	protected $latte;
 	protected $helpers;
+	protected $eventDispatcher;
 	protected $cacheDir;
 
 	protected $cache;
 
-	public function __construct(TemplateNameParserInterface $parser, LoaderInterface $loader, Latte $latte, Helpers $helpers)
+	public function __construct(TemplateNameParserInterface $parser, LoaderInterface $loader, Latte $latte, Helpers $helpers, EventDispatcherInterface $eventDispatcher)
 	{
 		$this->parser = $parser;
 		$this->loader = $loader;
 		$this->latte = $latte;
 		$this->helpers = $helpers;
+		$this->eventDispatcher = $eventDispatcher;
 
 		$this->cache = array();
 	}
@@ -109,6 +114,7 @@ class LatteEngine implements EngineInterface
 				$storage = new PhpFileStorage($this->cacheDir, new FileJournal($this->cacheDir));
 				$template->setCacheStorage($storage);
 			}
+			$this->eventDispatcher->dispatch(LatteEvents::CREATE_TEMPLATE, new CreateTemplateEvent($template));
 			$template->setParameters($parameters);
 			ob_start();
 			$template->render();
@@ -127,6 +133,7 @@ class LatteEngine implements EngineInterface
 				$storage = new PhpFileStorage($this->cacheDir, new FileJournal($this->cacheDir));
 				$template->setCacheStorage($storage);
 			}
+			$this->eventDispatcher->dispatch(LatteEvents::CREATE_TEMPLATE, new CreateTemplateEvent($template));
 			$template->setParameters($parameters);
 			ob_start();
 			$template->render();

@@ -8,7 +8,7 @@ parameters:
 services:
     templating.engine.latte:
         class: %templating.engine.latte.class%
-        arguments: [@templating.name_parser, @templating.loader, @latte.engine, @latte.helpers]
+        arguments: [@templating.name_parser, @templating.loader, @latte.engine, @latte.helpers, @debug.event_dispatcher]
         calls:
             - [setCacheDir, [%latte.cache_dir%]]
 
