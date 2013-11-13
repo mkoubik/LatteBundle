@@ -19,3 +19,4 @@ ToDo
 - cache macros
 - `{ifCurrent}` support
 - `{contentType}` and `{status}` support
+- automatically import helpers from services tagged with `templating.helper`
