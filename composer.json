@@ -8,7 +8,7 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "nette/nette": "2.0.*",
+        "nette/nette": "2.1.*",
         "symfony/symfony": "2.3.*"
     },
     "autoload": {
