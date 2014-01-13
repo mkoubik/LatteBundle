@@ -11,6 +11,9 @@
         "nette/nette": "2.1.*",
         "symfony/symfony": "2.3.*"
     },
+    "require-dev": {
+        "nette/tester": "*"
+    },
     "autoload": {
         "psr-0": {
             "LatteBundle\\": "src/"
