@@ -1,0 +1,8 @@
+parameters:
+    kernel.secret: 123
+
+framework:
+    templating:
+        engines: [ latte ]
+    router:
+        resource: ""
