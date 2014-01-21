@@ -31,3 +31,7 @@ $kernel->boot();
 $container = $kernel->getContainer();
 
 Assert::true($container->has('latte.engine'));
+
+Assert::type('Nette\Latte\Parser', $container->get('latte.parser'));
+Assert::type('Nette\Latte\Compiler', $container->get('latte.compiler'));
+Assert::true($container->has('latte.filter'));

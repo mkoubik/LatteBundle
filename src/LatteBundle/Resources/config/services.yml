@@ -6,6 +6,20 @@ parameters:
     latte.cache_dir: %kernel.cache_dir%/latte
 
 services:
+    latte.parser:
+        class: Nette\Latte\Parser
+
+    latte.compiler.factory:
+        class: LatteBundle\Bridge\Nette\Latte\CompilerFactory
+
+    latte.compiler:
+        class: Nette\Latte\Compiler
+        factory: [ @latte.compiler.factory, create ]
+
+    latte.filter:
+        class: LatteBundle\Bridge\Nette\Templating\LatteFilter
+        arguments: [ @latte.parser, @latte.compiler ]
+
     templating.engine.latte:
         class: %templating.engine.latte.class%
         arguments: [@templating.name_parser, @templating.loader, @latte.engine, @latte.helpers, @event_dispatcher]
