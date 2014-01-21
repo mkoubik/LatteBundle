@@ -45,6 +45,13 @@ services:
         tags:
             - { name: kernel.event_listener, event: latte.create_template, method: onCreateTemplate }
 
+    # TODO: integrational test
+    latte.listner.latteFilter:
+        class: LatteBundle\Listener\LatteFilterListener
+        arguments: [ @latte.cache_storage ]
+        tags:
+            - { name: kernel.event_listener, event: latte.create_template, method: onCreateTemplate }
+
     templating.engine.latte:
         class: %templating.engine.latte.class%
         arguments: [@templating.name_parser, @templating.loader, @latte.engine, @latte.helpers, @event_dispatcher]
