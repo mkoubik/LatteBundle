@@ -60,10 +60,8 @@ services:
             - { name: kernel.event_listener, event: latte.create_template, method: onCreateTemplate }
 
     templating.engine.latte:
-        class: %templating.engine.latte.class%
-        arguments: [@templating.name_parser, @templating.loader, @latte.engine, @latte.helpers, @event_dispatcher]
-        calls:
-            - [setCacheDir, [%latte.cache_dir%]]
+        class: LatteBundle\LatteEngine
+        arguments: [ @templating.name_parser, @templating.loader, @latte.template_factory ]
 
     assetic.latte_formula_loader:
         class: %assetic.cached_formula_loader.class% # TODO: LatteBundle should work without symfony/assetic-bundle
