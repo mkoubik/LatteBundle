@@ -30,6 +30,21 @@ services:
         class: LatteBundle\Bridge\Nette\Templating\EventedTemplateFactory
         arguments: [ @latte.template_factory.storage, @event_dispatcher ]
 
+    latte.cache_storage:
+        class: Nette\Caching\Storages\PhpFileStorage
+        arguments: [ %latte.cache_dir%, @latte.cache_journal ]
+
+    latte.cache_journal:
+        class: Nette\Caching\Storages\FileJournal
+        arguments: [ %latte.cache_dir% ]
+
+    # TODO: integrational test
+    latte.listner.cache:
+        class: LatteBundle\Listener\CacheListener
+        arguments: [ @latte.cache_storage ]
+        tags:
+            - { name: kernel.event_listener, event: latte.create_template, method: onCreateTemplate }
+
     templating.engine.latte:
         class: %templating.engine.latte.class%
         arguments: [@templating.name_parser, @templating.loader, @latte.engine, @latte.helpers, @event_dispatcher]

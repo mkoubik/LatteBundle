@@ -2,14 +2,14 @@
 
 namespace LatteBundle\Event;
 
-use Nette\Templating\ITemplate as TemplateInterface;
+use Nette\Templating;
 use Symfony\Component\EventDispatcher\Event;
 
 class TemplateEvent extends Event
 {
 	protected $template;
 
-	public function __construct(TemplateInterface $template)
+	public function __construct(Templating\ITemplate $template)
 	{
 		$this->template = $template;
 	}
