@@ -20,6 +20,16 @@ services:
         class: LatteBundle\Bridge\Nette\Templating\LatteFilter
         arguments: [ @latte.parser, @latte.compiler ]
 
+    latte.template_factory:
+        alias: latte.template_factory.evented
+
+    latte.template_factory.storage:
+        class: LatteBundle\Bridge\Nette\Templating\TemplateFactory
+
+    latte.template_factory.evented:
+        class: LatteBundle\Bridge\Nette\Templating\EventedTemplateFactory
+        arguments: [ @latte.template_factory.storage, @event_dispatcher ]
+
     templating.engine.latte:
         class: %templating.engine.latte.class%
         arguments: [@templating.name_parser, @templating.loader, @latte.engine, @latte.helpers, @event_dispatcher]

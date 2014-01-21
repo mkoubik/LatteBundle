@@ -5,7 +5,7 @@ namespace LatteBundle\Event;
 use Nette\Templating\ITemplate as TemplateInterface;
 use Symfony\Component\EventDispatcher\Event;
 
-class CreateTemplateEvent extends Event
+class TemplateEvent extends Event
 {
 	protected $template;
 

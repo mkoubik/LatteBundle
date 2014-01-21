@@ -7,13 +7,9 @@ use Symfony\Component\Templating\Storage\FileStorage;
 use Symfony\Component\Templating\Storage\Storage;
 use Symfony\Component\Templating\Storage\StringStorage;
 
-// TODO: interface and chaining?
-class TemplateFactory
+// TODO: chaining?
+class TemplateFactory implements TemplateFactoryInterface
 {
-	/**
-	 * @param  Storage $storage
-	 * @return Templating\ITemplate|NULL
-	 */
 	public function createFromStorage(Storage $storage)
 	{
 		if ($storage instanceof StringStorage) {
