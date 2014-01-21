@@ -14,7 +14,6 @@ class TestingEngine extends CachingEngine
 	}
 
 	public function render($name, array $parameters = array()) {}
-	public function exists($name) {}
 }
 
 $mockista = new Mockista\Registry();

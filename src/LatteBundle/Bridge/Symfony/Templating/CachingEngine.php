@@ -19,6 +19,16 @@ abstract class CachingEngine implements EngineInterface
 		$this->loader = $loader;
 	}
 
+	public function exists($name)
+	{
+		try {
+			$this->load($name);
+		} catch (\InvalidArgumentException $e) {
+			return false;
+		}
+		return true;
+	}
+
 	public function supports($name)
 	{
 		$template = $this->parser->parse($name);
