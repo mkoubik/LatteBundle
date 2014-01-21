@@ -19,6 +19,13 @@ abstract class CachingEngine implements EngineInterface
 		$this->loader = $loader;
 	}
 
+	public function supports($name)
+	{
+		$template = $this->parser->parse($name);
+		$engine = $template->get('engine');
+		return $this->supportsEngine($engine);
+	}
+
 	protected function load($name)
 	{
 		$template = $this->parser->parse($name);
@@ -35,5 +42,10 @@ abstract class CachingEngine implements EngineInterface
 		}
 
 		return $this->cache[$key] = $storage;
+	}
+
+	protected function supportsEngine($engine)
+	{
+		return false;
 	}
 }

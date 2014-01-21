@@ -8,9 +8,9 @@ require_once __DIR__ . '/../bootstrap.php';
 
 class TestingEngine extends CachingEngine
 {
-	public function load($name)
+	protected function supportsEngine($engine)
 	{
-		return parent::load($name);
+		return $engine === 'latte';
 	}
 
 	public function render($name, array $parameters = array()) {}
@@ -19,18 +19,17 @@ class TestingEngine extends CachingEngine
 
 $mockista = new Mockista\Registry();
 
-$_template = new TemplateReference('template.latte', 'latte');
-$_storage = new StringStorage('test');
-
 $parser = $mockista->create('Symfony\Component\Templating\TemplateNameParserInterface');
-$parser->expects('parse')->twice()->with('template.latte')->andReturn($_template);
+$parser->expects('parse')->once()->with('template.latte')
+	->andReturn(new TemplateReference('template.latte', 'latte'));
+$parser->expects('parse')->once()->with('template.twig')
+	->andReturn(new TemplateReference('template.twig', 'twig'));
 
 $loader = $mockista->create('Symfony\Component\Templating\Loader\LoaderInterface');
-$loader->expects('load')->once()->with($_template)->andReturn($_storage);
 
 $engine = new TestingEngine($parser, $loader);
 
-$engine->load('template.latte');
-$engine->load('template.latte');
+Assert::true($engine->supports('template.latte'));
+Assert::false($engine->supports('template.twig'));
 
 $mockista->assertExpectations();
