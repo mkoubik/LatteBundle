@@ -24,6 +24,7 @@ class LatteEngine extends CachingEngine implements EngineInterface
 		if ($template === null) {
 			throw new \RuntimeException(sprintf('The template "%s" cannot be rendered.', $name));
 		}
+		$template->setParameters($parameters);
 
 		ob_start();
 		$template->render();

@@ -9,7 +9,7 @@ class CompilerFactory
 	public function create()
 	{
 		$compiler = new Latte\Compiler();
-		// TODO: install macros
+		Latte\Macros\CoreMacros::install($compiler);
 		return $compiler;
 	}
 }

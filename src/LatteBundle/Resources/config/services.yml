@@ -14,7 +14,8 @@ services:
 
     latte.compiler:
         class: Nette\Latte\Compiler
-        factory: [ @latte.compiler.factory, create ]
+        factory_service: latte.compiler.factory
+        factory_method: create
 
     latte.filter:
         class: LatteBundle\Bridge\Nette\Templating\LatteFilter
@@ -32,28 +33,29 @@ services:
 
     latte.cache_storage:
         class: Nette\Caching\Storages\PhpFileStorage
-        arguments: [ %latte.cache_dir%, @latte.cache_journal ]
-
-    latte.cache_journal:
-        class: Nette\Caching\Storages\FileJournal
+        factory_service: latte.cache_storage.factory
+        factory_method: create
         arguments: [ %latte.cache_dir% ]
 
+    latte.cache_storage.factory:
+        class: LatteBundle\Bridge\Nette\Caching\PhpFileStorageFactory
+
     # TODO: integrational test
-    latte.listner.cache:
+    latte.listener.cache:
         class: LatteBundle\Listener\CacheListener
         arguments: [ @latte.cache_storage ]
         tags:
             - { name: kernel.event_listener, event: latte.create_template, method: onCreateTemplate }
 
     # TODO: integrational test
-    latte.listner.latteFilter:
+    latte.listener.latteFilter:
         class: LatteBundle\Listener\LatteFilterListener
-        arguments: [ @latte.cache_storage ]
+        arguments: [ @latte.filter ]
         tags:
             - { name: kernel.event_listener, event: latte.create_template, method: onCreateTemplate }
 
     # TODO: integrational test
-    latte.listner.helpers:
+    latte.listener.helpers:
         class: LatteBundle\Listener\HelpersListener
         arguments: [ @latte.cache_storage ]
         tags:

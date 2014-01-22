@@ -2,7 +2,7 @@
 
 namespace LatteBundle;
 
-use LatteBundle\Bridge\LatteEngine as BaseEngine;
+use LatteBundle\Bridge\Symfony\Templating\LatteEngine as BaseEngine;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Response;
 

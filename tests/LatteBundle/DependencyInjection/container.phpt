@@ -2,6 +2,12 @@
 
 require_once __DIR__ . '/../bootstrap.php';
 
+use Symfony\Component\HttpKernel\Bundle\Bundle;
+
+class TestingBundle extends Bundle
+{
+}
+
 class TestKernel extends Symfony\Component\HttpKernel\Kernel
 {
 	public function registerBundles()
@@ -10,6 +16,7 @@ class TestKernel extends Symfony\Component\HttpKernel\Kernel
 			new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
 			new Symfony\Bundle\AsseticBundle\AsseticBundle(),
 			new LatteBundle\LatteBundle(),
+			new TestingBundle(),
 		);
 	}
 
@@ -30,9 +37,16 @@ $kernel->boot();
 
 $container = $kernel->getContainer();
 
-Assert::type('Symfony\Component\Templating\EngineInterface', $container->get('templating.engine.latte'));
-Assert::type('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface', $container->get('templating.engine.latte'));
+$engine = $container->get('templating.engine.latte');
+Assert::type('Symfony\Component\Templating\EngineInterface', $engine);
+Assert::type('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface', $engine);
 
 Assert::type('Nette\Latte\Parser', $container->get('latte.parser'));
 Assert::type('Nette\Latte\Compiler', $container->get('latte.compiler'));
 Assert::true($container->has('latte.filter'));
+
+$container->get('latte.listener.cache');
+
+$bundle = new TestingBundle();
+$html = $engine->render('TestingBundle:test:hello.html.latte', array('name' => 'WORLD'));
+Assert::match('Hello world!', $html);
