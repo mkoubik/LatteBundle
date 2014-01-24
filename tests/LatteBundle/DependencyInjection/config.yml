@@ -5,4 +5,4 @@ framework:
     templating:
         engines: [ latte ]
     router:
-        resource: ""
+        resource: "@TestingBundle/routing.yml"

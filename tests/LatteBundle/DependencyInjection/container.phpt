@@ -59,3 +59,6 @@ $html = $engine->render('TestingBundle:test:coreMacros.html.latte', array(
 	'empty' => '',
 ));
 Assert::matchFile(__DIR__ . '/expected/coreMacros.html', $html);
+
+$html = $engine->render('TestingBundle:test:uiMacros.html.latte', array());
+Assert::matchFile(__DIR__ . '/expected/uiMacros.html', $html);

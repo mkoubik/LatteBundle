@@ -68,6 +68,12 @@ services:
         tags:
             - { name: kernel.event_listener, event: latte.create_template, method: onCreateTemplate }
 
+    templating.helper.latte.ui_macros:
+        class: LatteBundle\Bridge\Symfony\Templating\Helper\UIMacrosHelper
+        arguments: [ @router ]
+        tags:
+            - { name: templating.helper }
+
     templating.engine.latte:
         class: LatteBundle\LatteEngine
         arguments: [ @templating.name_parser, @templating.loader, @latte.template_factory ]

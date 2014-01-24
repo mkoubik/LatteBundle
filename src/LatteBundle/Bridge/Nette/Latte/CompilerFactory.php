@@ -2,6 +2,7 @@
 
 namespace LatteBundle\Bridge\Nette\Latte;
 
+use LatteBundle\Bridge\Nette\Latte\Macros;
 use Nette\Latte;
 
 class CompilerFactory
@@ -10,6 +11,7 @@ class CompilerFactory
 	{
 		$compiler = new Latte\Compiler();
 		Latte\Macros\CoreMacros::install($compiler);
+		Macros\UIMacros::install($compiler);
 		return $compiler;
 	}
 }
