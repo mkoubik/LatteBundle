@@ -37,6 +37,10 @@ $kernel->boot();
 
 $container = $kernel->getContainer();
 
+$request = Symfony\Component\HttpFoundation\Request::create('http://example.com/');
+$container->set('request', $request);
+$container->enterScope('request');
+
 $engine = $container->get('templating.engine.latte');
 Assert::type('Symfony\Component\Templating\EngineInterface', $engine);
 Assert::type('Symfony\Bundle\FrameworkBundle\Templating\EngineInterface', $engine);
@@ -47,6 +51,5 @@ Assert::true($container->has('latte.filter'));
 
 $container->get('latte.listener.cache');
 
-$bundle = new TestingBundle();
 $html = $engine->render('TestingBundle:test:hello.html.latte', array('name' => 'WORLD'));
 Assert::match('Hello world!', $html);

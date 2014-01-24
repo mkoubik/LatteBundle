@@ -61,6 +61,13 @@ services:
         tags:
             - { name: kernel.event_listener, event: latte.create_template, method: onCreateTemplate }
 
+    # TODO: integrational test
+    latte.listener.helper_services:
+        class: LatteBundle\Listener\HelperServicesListener
+        scope: request
+        tags:
+            - { name: kernel.event_listener, event: latte.create_template, method: onCreateTemplate }
+
     templating.engine.latte:
         class: LatteBundle\LatteEngine
         arguments: [ @templating.name_parser, @templating.loader, @latte.template_factory ]
