@@ -1,0 +1,6 @@
+if: {if $name == 'world'}OK{else}FAIL{/if}
+ifset: {ifset $name}OK{/ifset}
+{ifset $nonexistingVar}FAIL{/ifset}OK
+for: {for $i = 0; $i < 3; $i++}{$i}{/for}
+ifcontent: <p n:ifcontent></p>OK
+<p n:ifcontent>{$name}</p>

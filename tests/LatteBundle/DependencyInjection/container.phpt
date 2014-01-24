@@ -53,3 +53,9 @@ $container->get('latte.listener.cache');
 
 $html = $engine->render('TestingBundle:test:hello.html.latte', array('name' => 'WORLD'));
 Assert::match('Hello world!', $html);
+
+$html = $engine->render('TestingBundle:test:coreMacros.html.latte', array(
+	'name' => 'world',
+	'empty' => '',
+));
+Assert::matchFile(__DIR__ . '/expected/coreMacros.html', $html);
