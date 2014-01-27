@@ -64,7 +64,6 @@ services:
     # TODO: integrational test
     latte.listener.helper_services:
         class: LatteBundle\Listener\HelperServicesListener
-        scope: request
         tags:
             - { name: kernel.event_listener, event: latte.create_template, method: onCreateTemplate }
 

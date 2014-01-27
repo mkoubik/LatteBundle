@@ -17,7 +17,8 @@ class TemplatingPass implements CompilerPassInterface
 		$definition = $container->getDefinition('latte.listener.helper_services');
 		foreach ($container->findTaggedServiceIds('templating.helper') as $id => $attributes) {
 			$alias = isset($attributes[0]['alias']) ? $attributes[0]['alias'] : null;
-			$definition->addMethodCall('addHelper', array(new Reference($id), $alias));
+			$reference = new Reference($id, $container::EXCEPTION_ON_INVALID_REFERENCE, false);
+			$definition->addMethodCall('addHelper', array($reference, $alias));
 		}
 	}
 }
