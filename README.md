@@ -17,6 +17,4 @@ ToDo
 - support for `@Bundle:Resources/views/file.html.latte` syntax in `{extends}`
 - form macros
 - cache macros
-- `{ifCurrent}` support
 - `{contentType}` and `{status}` support
-- automatically import helpers from services tagged with `templating.helper`

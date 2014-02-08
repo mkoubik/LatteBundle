@@ -1,2 +1,6 @@
 test:
     pattern: /testing-url
+
+homepage:
+    pattern: /home
+    defaults: { _controller: 'TestingBundle:Homepage:index' }

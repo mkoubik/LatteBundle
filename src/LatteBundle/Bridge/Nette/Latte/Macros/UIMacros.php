@@ -27,7 +27,7 @@ class UIMacros extends Latte\Macros\UIMacros
 		});
 		$me->addMacro('plink', array($me, 'macroLink'));
 		$me->addMacro('link', array($me, 'macroLink'));
-		// $me->addMacro('ifCurrent', array($me, 'macroIfCurrent'), '}'); // deprecated; use n:class="$presenter->linkCurrent ? ..."
+		$me->addMacro('ifCurrent', array($me, 'macroIfCurrent'), '}'); // deprecated; use n:class="$presenter->linkCurrent ? ..."
 
 		// $me->addMacro('contentType', array($me, 'macroContentType'));
 		// $me->addMacro('status', array($me, 'macroStatus'));
@@ -41,5 +41,13 @@ class UIMacros extends Latte\Macros\UIMacros
 	public function macroLink(Latte\MacroNode $node, Latte\PhpWriter $writer)
 	{
 		return $writer->write('echo %escape(%modify($_uiMacros->getPath(%node.word, %node.array)))');
+	}
+
+	/**
+	 * {ifCurrent destination [,] [params]}
+	 */
+	public function macroIfCurrent(Latte\MacroNode $node, Latte\PhpWriter $writer)
+	{
+		return $writer->write('if ($request->getParameter("_route") == %node.word) {');
 	}
 }
