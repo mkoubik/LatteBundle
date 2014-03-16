@@ -67,6 +67,13 @@ services:
         tags:
             - { name: kernel.event_listener, event: latte.create_template, method: onCreateTemplate }
 
+    # TODO: integrational test
+    latte.listener.globals:
+        class: LatteBundle\Listener\GlobalVariablesListener
+        arguments: [ @templating.globals ]
+        tags:
+            - { name: kernel.event_listener, event: latte.create_template, method: onCreateTemplate }
+
     templating.helper.latte.ui_macros:
         class: LatteBundle\Bridge\Symfony\Templating\Helper\UIMacrosHelper
         arguments: [ @router ]
