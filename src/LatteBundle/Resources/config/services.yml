@@ -4,6 +4,8 @@ parameters:
     latte.engine.class: LatteBundle\Bridge\Latte\Engine
     latte.helpers.class: LatteBundle\Bridge\Latte\Helpers
     latte.cache_dir: %kernel.cache_dir%/latte
+    latte.form.default_themes:
+        - "LatteBundle:Bootstrap3"
 
 services:
     latte.parser:
@@ -79,6 +81,20 @@ services:
         arguments: [ @router ]
         tags:
             - { name: templating.helper }
+
+    templating.helper.latte.forms:
+        class: LatteBundle\Bridge\Symfony\Templating\Helper\FormHelper
+        arguments: [ @latte.form.renderer ]
+        tags:
+            - { name: templating.helper }
+
+    latte.form.engine:
+        class: LatteBundle\Bridge\Symfony\Form\LatteRendererEngine
+        arguments: [ @templating.engine.latte, %latte.form.default_themes% ]
+
+    latte.form.renderer:
+        class: LatteBundle\Bridge\Symfony\Form\LatteRenderer
+        arguments: [ @latte.form.engine, @form.csrf_provider ]
 
     templating.engine.latte:
         class: LatteBundle\LatteEngine
