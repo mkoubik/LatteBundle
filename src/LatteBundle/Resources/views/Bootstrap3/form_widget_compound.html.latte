@@ -1,0 +1,7 @@
+<div n:attr="id => $id" {foreach $attr as $attrname => $attrvalue}{$attrname}="{$attrvalue}" {/foreach}>
+    {if empty($form->parent)}
+        {!$latteForms->errors($form)}
+    {/if}
+    {include form_rows.html.latte}
+    {!$latteForms->rest($form)}
+</div>

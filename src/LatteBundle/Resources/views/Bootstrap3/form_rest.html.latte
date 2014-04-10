@@ -1,0 +1,5 @@
+{foreach $form as $child}
+    {if !$child->isRendered()}
+        {!$latteForms->row($child)}
+    {/if}
+{/foreach}

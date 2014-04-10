@@ -1,0 +1,5 @@
+{if empty($label)}
+    {var label => $label|humanize}
+{/if}
+<button type="{isset($type) ? $type : button}" id="{$id}" name="{$full_name}"{if $disabled} disabled="disabled"{/if}
+    {foreach $attr as $attrname => $attrvalue}{$attrname}="{$attrvalue}" {/foreach} n:class="btn, btn-default">{$label}</button>

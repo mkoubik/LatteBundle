@@ -1,0 +1,7 @@
+{if $label !== false}
+    {if empty($label)}
+        {var label => $name|humanize}
+    {/if}
+    <label
+        n:class="$required ? required, isset($label_attr['class']) ? $label_attr['class']" n:attr="for => !$compound ? $id" {foreach $attr as $attrname => $attrvalue}{$attrname}="{$attrvalue}"{/foreach}>{$label}</label>
+{/if}

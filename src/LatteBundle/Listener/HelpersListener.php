@@ -9,6 +9,7 @@ class HelpersListener
 	public function onCreateTemplate(TemplateEvent $event)
 	{
 		$template = $event->getTemplate();
-		$template->registerHelperLoader('Nette\Templating\Helpers::loader');
+        $template->registerHelperLoader('Nette\Templating\Helpers::loader');
+        $template->registerHelperLoader('LatteBundle\Bridge\Nette\Templating\Helpers::loader');
 	}
 }
