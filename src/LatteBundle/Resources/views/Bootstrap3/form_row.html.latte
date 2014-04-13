@@ -1,5 +1,5 @@
 <div n:class="form-group, count($errors) ? has-error">
-    {!$latteForms->label($form)}
-    {!$latteForms->widget($form)}
-    {!$latteForms->errors($form)}
+    {form_label $form}
+    {form_widget $form}
+    {form_errors $form}
 </div>

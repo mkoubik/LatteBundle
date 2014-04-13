@@ -12,7 +12,8 @@ class CompilerFactory
 		$compiler = new Latte\Compiler();
 		Latte\Macros\CoreMacros::install($compiler);
 		Macros\UIMacros::install($compiler);
-		Macros\AssetMacros::install($compiler);
+        Macros\AssetMacros::install($compiler);
+        Macros\FormMacros::install($compiler);
 		return $compiler;
 	}
 }
