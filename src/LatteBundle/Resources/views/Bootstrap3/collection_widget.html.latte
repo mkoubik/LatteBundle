@@ -1,0 +1,4 @@
+{if isset($prototype)}
+    {var attr => array_merge(attr, ['data-prototype' => $latteForms->form_row($prototype)])}
+{/if}
+{include form_widget.html.latte attr => $attr}
