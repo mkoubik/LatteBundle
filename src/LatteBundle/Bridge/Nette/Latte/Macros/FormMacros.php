@@ -22,13 +22,12 @@ class FormMacros extends MacroSet
         $me->addMacro('form_label', array($me, 'macroForm'));
         $me->addMacro('form_widget', array($me, 'macroForm'));
         $me->addMacro('form_errors', array($me, 'macroForm'));
+
+        $me->addMacro('form_theme', '$_latteForms->setTheme(%node.word, %node.array?)');
     }
 
     public function macroForm(MacroNode $node, PhpWriter $writer)
     {
-        // if ($node->htmlNode) {
-        //     throw new CompileException("Unknown macro attribute n:{$node->name}.");
-        // }
         $name = $node->tokenizer->fetchWord();
         if ($name === FALSE) {
             throw new CompileException("Missing form name in {{$node->name}}.");
