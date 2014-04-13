@@ -48,6 +48,6 @@ class UIMacros extends Latte\Macros\UIMacros
 	 */
 	public function macroIfCurrent(Latte\MacroNode $node, Latte\PhpWriter $writer)
 	{
-		return $writer->write('if ($request->getParameter("_route") == %node.word) {');
+		return $writer->write('if ($_request->getParameter("_route") == %node.word) {');
 	}
 }

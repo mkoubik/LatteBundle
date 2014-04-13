@@ -15,6 +15,6 @@ class AssetMacros extends Latte\Macros\MacroSet
 
 	public function macroAsset(Latte\MacroNode $node, Latte\PhpWriter $writer)
 	{
-		return $writer->write('echo %escape($assets->getUrl(%node.args))');
+		return $writer->write('echo %escape($_assets->getUrl(%node.args))');
 	}
 }

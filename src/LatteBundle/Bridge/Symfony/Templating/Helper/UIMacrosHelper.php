@@ -17,7 +17,7 @@ class UIMacrosHelper extends Helper
 
 	public function getName()
 	{
-		return '_uiMacros';
+		return 'uiMacros';
 	}
 
 	public function getPath($name, $parameters = array())

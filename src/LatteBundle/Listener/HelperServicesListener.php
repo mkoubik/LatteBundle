@@ -21,7 +21,7 @@ class HelperServicesListener
 	{
 		$template = $event->getTemplate();
 		foreach ($this->helpers as $name => $helper) {
-			$template->{$name} = $helper;
+			$template->{'_' . $name} = $helper;
 		}
 	}
 }
