@@ -1,0 +1,9 @@
+{foreach $options as $group_label => $choice}
+    {if $choice instanceof \Traversable or is_array($choice)}
+        <optgroup label="{$group_label}">
+            {include choice_widget_options.html.latte, options => $choice}
+        </optgroup>
+    {else}
+        <option value="{$choice->value}" n:attr="selected => $_latteForms->isSelectedChoice($choice, $value) ? selected">{$choice->label}</option>
+    {/if}
+{/foreach}

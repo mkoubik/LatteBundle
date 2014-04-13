@@ -1,0 +1,16 @@
+{if $required and $empty_value === null and !$empty_value_in_choices and !$multiple}
+    {var required => false}
+{/if}
+<select id="{$id}" name="{$full_name}"{if $read_only} readonly="readonly"{/if}{if $disabled} disabled="disabled"{/if}{if $required} required="required"{/if}{if $max_length} maxlength="{$max_length}"{/if}{if $pattern} pattern="{$pattern}"{/if}
+{foreach $attr as $attrname => $attrvalue}{if in_array(['placeholder', 'title'], $attrname)}{$attrname}="{$attrvalue}" {else}{$attrname}="{$attrvalue}" {/if}{/foreach}{if $multiple} multiple="multiple"{/if} class="form-control">
+    {if $empty_value !== null}
+        <option value="" n:attr="selected => ($required and empty($value)) ? selected">{$empty_value}</option>
+    {/if}
+    {if count($preferred_choices) > 0}
+        {include choice_widget_options.html.latte, options => $preferred_choices}
+        {if count($choices) > 0 and $separator !== null}
+            <option disabled="disabled">{$separator }</option>
+        {/if}
+    {/if}
+    {include choice_widget_options.html.latte, options => $choices}
+</select>
