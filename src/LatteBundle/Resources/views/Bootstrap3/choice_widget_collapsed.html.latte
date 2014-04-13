@@ -2,7 +2,7 @@
     {var required => false}
 {/if}
 <select id="{$id}" name="{$full_name}"{if $read_only} readonly="readonly"{/if}{if $disabled} disabled="disabled"{/if}{if $required} required="required"{/if}{if $max_length} maxlength="{$max_length}"{/if}{if $pattern} pattern="{$pattern}"{/if}
-{foreach $attr as $attrname => $attrvalue}{if in_array(['placeholder', 'title'], $attrname)}{$attrname}="{$attrvalue}" {else}{$attrname}="{$attrvalue}" {/if}{/foreach}{if $multiple} multiple="multiple"{/if} class="form-control">
+{foreach $attr as $attrname => $attrvalue}{$attrname}="{$attrvalue}" {/foreach}{if $multiple} multiple="multiple"{/if} class="form-control">
     {if $empty_value !== null}
         <option value="" n:attr="selected => ($required and empty($value)) ? selected">{$empty_value}</option>
     {/if}

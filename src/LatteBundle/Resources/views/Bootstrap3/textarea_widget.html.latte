@@ -1,2 +1,2 @@
 <textarea id="{$id}" name="{$full_name}"{if $read_only} readonly="readonly"{/if}{if $disabled} disabled="disabled"{/if}{if $required} required="required"{/if}{if $max_length} maxlength="{$max_length}"{/if}{if $pattern} pattern="{$pattern}"{/if}
-{foreach $attr as $attrname => $attrvalue}{if in_array(['placeholder', 'title'], $attrname)}{$attrname}="{$attrvalue}" {else}{$attrname}="{$attrvalue}" {/if}{/foreach} n:class="form-control">{$value}</textarea>
+{foreach $attr as $attrname => $attrvalue}{$attrname}="{$attrvalue}" {/foreach} n:class="form-control">{$value}</textarea>
