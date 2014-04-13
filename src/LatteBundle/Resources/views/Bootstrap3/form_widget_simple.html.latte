@@ -1,3 +1,2 @@
 {var type => isset($type) ? $type : text}
-<input type="{$type}" id="{$id}" name="{$full_name}"{if $read_only} readonly="readonly"{/if}{if $disabled} disabled="disabled"{/if}{if $required} required="required"{/if}{if $max_length} maxlength="{$max_length}"{/if}{if $pattern} pattern="{$pattern}"{/if}
-{foreach $attr as $attrname => $attrvalue}{$attrname}={$attrvalue} {/foreach} n:attr="value => $value" n:class="form-control" />
+<input type="{$type}" id="{$id}" name="{$full_name}" n:attr="readonly => $read_only ? readonly, disabled => $disabled ? disabled, requered => $required ? required, maxlength => $max_length, pattern => $pattern, placeholder => isset($attr['placeholder']) ? $attr['placeholder'], title => isset($attr['title']) ? $attr['title'], value => $value" n:class="isset($attr['class']) ? $attr['class'] : form-control" />

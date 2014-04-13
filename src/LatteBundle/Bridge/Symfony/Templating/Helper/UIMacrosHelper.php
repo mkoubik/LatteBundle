@@ -24,11 +24,10 @@ class UIMacrosHelper extends Helper
 	{
 		if (Strings::startsWith($name, '//')) {
 			$name = Strings::substring($name, 2);
-			$relative = false;
+			$absolute = true;
 		} else {
-			$relative = true;
+			$absolute = false;
 		}
-		return $this->generator
-			->generate($name, $parameters, $relative ? UrlGeneratorInterface::RELATIVE_PATH : UrlGeneratorInterface::ABSOLUTE_PATH);
+        return $this->generator->generate($name, $parameters, $absolute);
 	}
 }
