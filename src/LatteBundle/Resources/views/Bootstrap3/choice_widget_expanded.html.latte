@@ -1,4 +1,4 @@
-<div n:attr="id => !empty($id) => $id" {foreach $attr as $attrname => $attrvalue}{$attrname}="{$attrvalue}" {/foreach}>
+<div n:attr="id => !empty($id) ? $id" {foreach $attr as $attrname => $attrvalue}{$attrname}="{$attrvalue}" {/foreach}>
 {foreach $form as $child}
     {form_widget $child}
     {form_label $child}
