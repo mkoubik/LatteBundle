@@ -1,2 +1,15 @@
-<textarea id="{$id}" name="{$full_name}"{if $read_only} readonly="readonly"{/if}{if $disabled} disabled="disabled"{/if}{if $required} required="required"{/if}{if $max_length} maxlength="{$max_length}"{/if}{if $pattern} pattern="{$pattern}"{/if}
-{foreach $attr as $attrname => $attrvalue}{$attrname}="{$attrvalue}" {/foreach} n:class="form-control">{$value}</textarea>
+<textarea id="{$id}"
+    name="{$full_name}"
+    n:attr="
+        readonly => $read_only ? readonly,
+        disabled => $disabled ? disabled,
+        required => $required ? required,
+        maxlength => $max_length,
+        pattern => $pattern,
+        placeholder => isset($attr['placeholder']) ? $attr['placeholder'],
+        title => isset($attr['title']) ? $attr['title'],
+        readonly => $read_only ? readonly,
+        rows => isset($attr['rows']) ? $attr['rows'],
+        cols => isset($attr['cols']) ? $attr['cols']
+    "
+ n:class="form-control">{$value}</textarea>
