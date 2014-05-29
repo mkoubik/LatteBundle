@@ -1,2 +1,17 @@
 {var type => isset($type) ? $type : text}
-<input type="{$type}" id="{$id}" name="{$full_name}" n:attr="readonly => $read_only ? readonly, disabled => $disabled ? disabled, required => $required ? required, maxlength => $max_length, pattern => $pattern, placeholder => isset($attr['placeholder']) ? $attr['placeholder'], title => isset($attr['title']) ? $attr['title'], value => $value" n:class="isset($attr['class']) ? $attr['class'] : form-control" />
+<input type="{$type}"
+    id="{$id}"
+    name="{$full_name}"
+    n:attr="
+        readonly => $read_only ? readonly,
+        disabled => $disabled ? disabled,
+        required => $required ? required,
+        maxlength => $max_length,
+        pattern => $pattern,
+        placeholder => isset($attr['placeholder']) ? $attr['placeholder'],
+        title => isset($attr['title']) ? $attr['title'],
+        multiple => isset($attr['multiple']) ? $attr['multiple'],
+        value => $value
+    "
+    n:class="isset($attr['class']) ? $attr['class'] : form-control"
+/>
