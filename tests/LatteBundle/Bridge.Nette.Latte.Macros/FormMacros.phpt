@@ -22,7 +22,9 @@ $engine = $container->get('templating.engine.latte');
 $factory = Symfony\Component\Form\Forms::createFormFactory();
 
 
-$form1 = $factory->createBuilder()
+$form1 = $factory->createBuilder('form', null, array(
+        'attr' => array('class' => 'inline-form'),
+    ))
     ->add('create', 'submit', array(
         'label' => 'Create',
         'attr' => array('class' => 'button'),

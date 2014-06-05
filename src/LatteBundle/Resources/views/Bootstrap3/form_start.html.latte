@@ -1,4 +1,6 @@
 {var method => $method|upper}
 {var form_method => in_array($method, ['GET', 'POST']) ? $method : 'POST'}
-<form method="{$form_method|lower}" action="{$action}" n:attr="(expand) $attr"{if $multipart} enctype="multipart/form-data"{/if} n:class="isset($attr['class']) ? $attr['class']">
+{var class => isset($attr['class']) ? $attr['class']}
+{? unset($attr['class'])}
+<form method="{$form_method|lower}" action="{$action}" n:attr="(expand) $attr"{if $multipart} enctype="multipart/form-data"{/if} n:class="$class">
     <input n:if="$form_method != $method" type="hidden" name="_method" value="{$method}" />
