@@ -6,5 +6,5 @@
 <button type="{isset($type) ? $type : button}"
     id="{$id}"
     name="{$full_name}"
-    n:attr="(expand) $attr"
-    n:class="$class ?: 'btn btn-default'">{$label}</button>
+    n:attr="(expand) $attr, disabled => $disabled ? disabled"
+    n:class="$class !== null ? $class : 'btn btn-default'">{$label}</button>

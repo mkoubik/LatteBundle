@@ -1,5 +1,15 @@
-<form method="post" action="" class="inline-form">
+<form method="post" action="" required="required" class="inline-form">
 <button type="submit"
     id="form_create"
     name="form[create]" class="button">Create</button>
 </form>
+
+<input type="file"
+    id="form_image"
+    name="form[image]"
+ accept="image/*" value="">
+
+<input type="email"
+    id="form_email"
+    name="form[email]"
+ required="required" maxlength="255" value="" class="form-control">

@@ -2,5 +2,14 @@
 {var form_method => in_array($method, ['GET', 'POST']) ? $method : 'POST'}
 {var class => isset($attr['class']) ? $attr['class']}
 {? unset($attr['class'])}
-<form method="{$form_method|lower}" action="{$action}" n:attr="(expand) $attr"{if $multipart} enctype="multipart/form-data"{/if} n:class="$class">
+<form method="{$form_method|lower}" action="{$action}"
+    n:attr="
+        (expand) $attr,
+        readonly => $read_only ? readonly,
+        disabled => $disabled ? disabled,
+        required => $required ? required,
+        maxlength => $max_length,
+        pattern => $pattern,
+        enctype => $multipart ? 'multipart/form-data'
+    " n:class="$class">
     <input n:if="$form_method != $method" type="hidden" name="_method" value="{$method}" />

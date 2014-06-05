@@ -1,1 +1,16 @@
-<input type="checkbox"  id="{$id}" name="{$full_name}" n:attr="readonly => $read_only ? readonly, disabled => $disabled ? disabled, required => $required ? required, maxlength => $max_length, pattern => $pattern, placeholder => isset($attr['placeholder']) ? $attr['placeholder'], title => isset($attr['title']) ? $attr['title'], value => $value, checked => $checked ? checked" n:class="isset($attr['class']) ? $attr['class'] : form-control" />
+{var class => isset($attr['class']) ? $attr['class']}
+{? unset($attr['class'])}
+<input type="checkbox"
+    id="{$id}"
+    name="{$full_name}"
+    n:attr="
+        (expand) $attr,
+        readonly => $read_only ? readonly,
+        disabled => $disabled ? disabled,
+        required => $required ? required,
+        maxlength => $max_length,
+        pattern => $pattern,
+        value => $value,
+        checked => $checked ? checked"
+    n:class="$class !== null ? $class : form-control"
+/>
