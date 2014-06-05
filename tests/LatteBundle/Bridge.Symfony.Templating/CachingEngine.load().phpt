@@ -6,6 +6,8 @@ use Symfony\Component\Templating\Storage\StringStorage;
 
 require_once __DIR__ . '/../bootstrap.php';
 
+Tester\Environment::$checkAssertions = false;
+
 class TestingEngine extends CachingEngine
 {
 	public function load($name)

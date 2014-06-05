@@ -6,3 +6,12 @@ framework:
         engines: [ latte ]
     router:
         resource: "@TestingBundle/routing.yml"
+    form: ~
+    csrf_protection: ~
+    session:
+        handler_id: session.handler.null
+    secret: secret_t0ken!
+
+services:
+    session.handler.null:
+        class: Symfony\Component\HttpFoundation\Session\Storage\Handler\NullSessionHandler

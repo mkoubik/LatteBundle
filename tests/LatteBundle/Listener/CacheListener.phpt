@@ -5,6 +5,8 @@ use LatteBundle\Listener\CacheListener;
 
 require_once __DIR__ . '/../bootstrap.php';
 
+Tester\Environment::$checkAssertions = false;
+
 $mockista = new Mockista\Registry();
 
 $cacheStorage = $mockista->create('Nette\Caching\IStorage');
