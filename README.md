@@ -15,6 +15,5 @@ ToDo
 - template cache warmer
 - support for `@Bundle:Controller:action` syntax in `{link}` and `n:href`
 - support for `@Bundle:Resources/views/file.html.latte` syntax in `{extends}`
-- form macros
 - cache macros
 - `{contentType}` and `{status}` support
