@@ -5,3 +5,6 @@ for: {for $i = 0; $i < 3; $i++}{$i}{/for}
 ifcontent: <p n:ifcontent></p>OK
 <p n:ifcontent>{$name}</p>
 <p n:class="false ? 'foo--bar' : 'foo', true ? 'lorem--ipsum'"></p>
+
+<a href="#" n:class="button, true ? 'button--success', 'course__price-box__action'"></a>
+<a href="#" n:class="button, false ? 'button--success', 'course__price-box__action'"></a>
